@@ -1,0 +1,32 @@
+<h1>Thêm mới 1 danh muc</h1>
+
+<section class="content">
+        <div class="col-md-6">
+          <form role="form" action="/danh-muc" method="post" enctype="form-data">
+          <div class="form-group">
+            <label>Tên danh muc</label>
+            <input onchange="validation()" class="form-control" type="text" name="name" id="name" />
+          </div>
+          <div class="form-group">
+            <label>Mô tả</label>
+            <input class="form-control"  type="text" row="3" name="description" id="description"/>
+          </div>
+          <div class="box-footer">
+            <button  type="submit" id="submit" disabled class="btn btn-primary">Save</button>
+        </div>
+        </form>
+
+      </section><!-- /.content -->
+
+      <script>
+
+        const validation = () =>{
+            const name = document.getElementById('name').value;
+
+            if(!name || name.trim().length == 0){
+                submit.disabled = true;
+            }else{
+              submit.disabled = false;
+            }
+        }
+      </script>

@@ -1,0 +1,70 @@
+<h1>Thêm mới 1 sản phẩm</h1>
+
+<section class="content">
+        <div class="col-md-6">
+          <form role="form" action="/san-pham" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label>Tên sản phẩm</label>
+            <input onchange="validation()" class="form-control" type="text" name="name" id="name" />
+          </div>
+          <div class="form-group">
+            <label>Giá</label>
+            <input onchange="validation()" class="form-control" type="number" name="price" id="price"/>
+          </div>
+          <div class="form-group">
+            <label>Số lượng</label>
+            <input onchange="validation()" class="form-control"  type="number" name="quantity" id="quantity"/>
+          </div>
+          <div class="form-group">
+            <label>Image</label>
+            <input type="file" id="image-file" onchange="onChangeFile()" name="image">
+            <img id="image-view" width="100" height="100" src="" style="display: none;"/>
+          </div>
+          <div class="form-group">
+            <label>Mô tả</label>
+            <input class="form-control"  type="text" row="3" name="description" id="description"/>
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <select class="form-control"  type="text" name="category_id" >
+              {{#each categories}}
+              <option value="{{this._id}}">{{this.name}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Date:</label>
+            <input onchange="validation()"  class="form-control" type="date" name="released" id="released"> 
+          <div class="box-footer">
+            <button  type="submit" id="submit" disabled class="btn btn-primary">Save</button>
+          </div>
+        </div>
+        </form>
+
+      </section><!-- /.content -->
+
+      <script>
+
+        const validation = () =>{
+            const name = document.getElementById('name').value;
+            const price = document.getElementById('price').value;
+            const quantity = document.getElementById('quantity').value;
+            const released = document.getElementById('released').value;
+
+            if(!name || name.trim().length == 0){
+                submit.disabled = true;
+            }else{
+              submit.disabled = false;
+            }
+        }
+
+        const onChangeFile = () => {
+        const file = document.getElementById('image-file').files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+            document.getElementById('image-view').src = e.target.result;
+            document.getElementById('image-view').style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+    }
+      </script>
