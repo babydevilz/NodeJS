@@ -33,7 +33,7 @@ router.post('/', [upload.single('image'), authentication.checkLogin], async func
   let { body, file } = req;
   let image = ''
   if (file) {
-    image = `http://192.168.1.8:3000/images/${file.filename}`;
+    image = `http://hau13.herokuapp.com/images/${file.filename}`;
   }
   body = { ...body, image };
   await productController.insert(body);
@@ -83,7 +83,7 @@ router.post('/:id/edit', [upload.single('image'), authentication.checkLogin], as
   delete body.image;
 
   if (file) {
-    let image = `http://192.168.1.8:3000/images/${file.filename}`;// thay thành ip v4
+    let image = `http://hau13.herokuapp.com/images/${file.filename}`;// thay thành ip v4
     body = { ...body, image };
   }
 
