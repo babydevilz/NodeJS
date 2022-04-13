@@ -11,7 +11,7 @@ const authentication = require('../middle/authentication');
  * method: get
  * detail: get list categorys
  */
-router.get('/', async function (req, res, next) {
+router.get('/', [authentication.checkLogin], async function (req, res, next) {
 
   // lấy danh sách danh muc
   const data = await categoryController.getCategories();
@@ -25,7 +25,7 @@ router.get('/', async function (req, res, next) {
 * method: post
 * detail: insert new categorys
 */
-router.post('/',  async function (req, res, next) {
+router.post('/', [authentication.checkLogin],  async function (req, res, next) {
 
   // xử lý thêm mới danh muc
   let { body } = req;
@@ -41,7 +41,7 @@ router.post('/',  async function (req, res, next) {
  * method: delete
  * detail:delete categorys
  */
-router.delete('/:id/delete',  async function (req, res, next) {
+router.delete('/:id/delete', [authentication.checkLogin],  async function (req, res, next) {
   // xóa danh muc
   const { id } = req.params;
   await categoryController.delete(id);
@@ -55,7 +55,7 @@ router.delete('/:id/delete',  async function (req, res, next) {
  * method: get
  * detail:get one category
  */
-router.get('/:id/edit', async function (req, res, next) {
+router.get('/:id/edit', [authentication.checkLogin], async function (req, res, next) {
   // lấy 1 danh muc
   const { id } = req.params;
   const category = await categoryController.getById(id);
@@ -69,7 +69,7 @@ router.get('/:id/edit', async function (req, res, next) {
  * method: post
  * detail:update one category
  */
-router.post('/:id/edit', async function (req, res, next) {
+router.post('/:id/edit', [authentication.checkLogin], async function (req, res, next) {
   // cập nhật 1 danh muc
   let { params, body } = req;
 
@@ -84,7 +84,7 @@ router.post('/:id/edit', async function (req, res, next) {
  * method: get
  * detail:insert new category
  */
-router.get('/insert',  async function (req, res, next) {
+router.get('/insert', [authentication.checkLogin],  async function (req, res, next) {
   // hiển thị trang thêm mới
   const categories = await categoryController.getCategories();
   res.render('them_danh_muc', { categories: categories });
